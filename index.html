@@ -6,10 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <title>Document</title>
+    <script src="app.js" defer></script>
+
     <style>
         *{
             padding: 0;
             margin: 0;
+        }
+        p{
+          margin: 0;
+          font-weight: 700;
+          color: #147998;
         }
         nav{
             height: 60px;
@@ -19,8 +26,40 @@
             margin-left: 10px;
         }
 
-        li{
-            padding: 20px;
+        
+        .tableImg{
+          display: inline;
+        }
+        .detail{
+          display: inline;
+        }
+        .flex{
+          display: flex;
+          align-items: center;
+        }
+        .flex div{
+          margin-left: 10px;
+        }
+        .main{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height:fit-content;
+          padding: 10px;
+          margin: 10px;
+        }
+        table{
+          padding: 10px;
+
+        }
+        th{
+          border-top: 2px solid black;
+          padding-left: 15px;
+          border-bottom: 2px solid black;
+        }
+        td{
+          padding: 5px;
+          border-bottom : 1px solid rgb(145, 145, 145);
         }
 
 
@@ -66,16 +105,80 @@
   
 
       <input id="genre" type="text" placeholder="search genre">
+      <input id="year" type="text" placeholder="search year">
+      <input id="lang" type="text" placeholder="search language">
       <button id="genreBtn" type="'button">Search</button>
 
-      <div class="container">
-          <ol id="ul">
-          </ol>
-      </div>
+      <section>
+        <main>
+          <div class="main">
+            <table width="60%">
+              <colgroup>
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 70%;">
+                <col span="1" style="width: 15%;">
+             </colgroup>
+
+             <tr height="50" >
+               <th align="center">RANK</th>
+               <th>MOVIE</th>
+               <th>YEAR</th>
+              </tr>
+              <tbody id="tableBody">
+                <tr>
+                 <td>id</td>
+                 <td class="flex">
+                  <div class="tableImg">
+                    <img src="https://image.tmdb.org/t/p/w45//pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg"/>
+                  </div>
+                  <div class="detail">
+                    <p>title</p>
+                    <span>100m</span>
+                  </div>
+                </td>
+                 <td>year</td>
+               </tr>
+                <tr>
+                 <td>id</td>
+                 <td class="flex">
+                  <div class="tableImg">
+                    <img src="https://image.tmdb.org/t/p/w45//pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg"/>
+                  </div>
+                  <div class="detail">
+                    <p>title</p>
+                    <span>100m</span>
+                  </div>
+                </td>
+                 <td>year</td>
+               </tr>
+                <tr>
+                 <td>id</td>
+                 <td class="flex">
+                  <div class="tableImg">
+                    <img src="https://image.tmdb.org/t/p/w45/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg"/>
+                  </div>
+                  <div class="detail">
+                    <p>title</p>
+                    <span>100m</span>
+                  </div>
+                </td>
+                 <td>year</td>
+               </tr>
+               <tr>
+                 <td>id</td>
+                 <td>title</td>
+                 <td>year</td>
+               </tr> 
+             </tbody>
+            </table>
+          </div>
+        </main>
+      </section>
+
+     
 
     
 
-    <script src="app.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
 </html>

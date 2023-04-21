@@ -1,65 +1,80 @@
-const ul = document.getElementById("ul")
-const inputGenre = document.getElementById("genre");
-const genreBtn = document.getElementById('genreBtn')
+const btn = document.getElementById('genreBtn');
+const tableBody = document.getElementById('tableBody');
+const lang = document.getElementById('lang')
+const genre = document.getElementById('genre');
+const year = document.getElementById('year');
+
 
 const loadData =async ()=>{
-    let response =await fetch('./data.json')
-    let movies =await response.json();
-    movies = JSON.parse(JSON.stringify(movies,(a,b)=>{
-        return typeof b === 'string'? b.toLowerCase():b
-    }))
-// console.log(movies);
-movies.forEach((element)=>{
-    let title = element.title;
-    const li = document.createElement('li')
-     let a =ul.appendChild(li).innerHTML = `<h2>${title}</h2><p>${element.overview}</p><span><strong>TAG: </strong>${element.tagline}</span><br>`
-})
+   const response = await fetch('./data.json')
+   const movies = await response.json();
+
+
+   btn.addEventListener('click',()=>{
+    const genreQuery = genre.value.toLowerCase();
+    const yearQuery = year.value;
+    const langQuery = lang.value.toLowerCase();
+    tableBody.innerHTML = ""
+
+    movies.filter(function (movie){
+        const movieLanguage = movie.language.toLowerCase()
+        let movieYear = movie.release_date;
+        movieYear = movieYear.substring(0,4)
+
+        if (!genreQuery && !yearQuery && !langQuery) {
+            return false
+        }
+        else if((movieYear==yearQuery)&&(!langQuery) && (!genreQuery)){
+            return movie
+        }
+        else if((movieLanguage === langQuery)&&(!yearQuery) && (!genreQuery)){
+            return movie
+        }
+        else if((movieLanguage == langQuery)&&(movieYear == yearQuery) && (!genreQuery)){
+            return movie
+        }
+        else if(genreQuery){
+            for(let i =0;i<movie.genres.length;i++){
+                if((movie.genres[i].toLowerCase().includes(genreQuery)) && (!yearQuery) && (!langQuery)){
+                    return movie
+                }
+                else if((movie.genres[i].toLowerCase().includes(genreQuery)) && (movieYear==yearQuery) && (!langQuery)){
+                    return movie
+                }
+                else if((movie.genres[i].toLowerCase().includes(genreQuery)) && (movieLanguage==langQuery) && (!yearQuery)){
+                    return movie
+                }
+                else if((movie.genres[i].toLowerCase().includes(genreQuery)) && (movieYear==yearQuery) && (movieLanguage==langQuery)){
+                    return movie
+                }
+            }
+        }
+       
+    }).forEach((movie,id)=>{
+        let movieYear = movie.release_date;
+        movieYear = movieYear.substring(0,4);
+
+        const tr = document.createElement('tr');
+        // let
+
+        tableBody.appendChild(tr).innerHTML="";
+        tableBody.appendChild(tr).innerHTML=`<td>${id+1}</td>
+        <td class="flex">
+         <div class="tableImg">
+           <img src="https://image.tmdb.org/t/p/w45${movie.image}"/>
+         </div>
+         <div class="detail">
+           <p>${movie.title}</p>
+           <span>${movie.genres.join(', ')} &nbsp;  ${movie.runtime}m</span>
+         </div>
+       </td>
+        <td>${movieYear}</td>`
+        // document.write(`<img src="https://image.tmdb.org/t/p/w45${movie.image}" /><br>`)
+        console.log(movie.genres + "  " + movieYear +"  "+movie.language)
+    })
+   })
+
 }
-loadData()
-
-const searchGenre = ()=>{
-    const query = inputGenre.value
-    console.log(query)
-}
+loadData();
 
 
-
-genreBtn.addEventListener("click",searchGenre)
-
-
-
-// const movies = async()=>{
-//     let res = await fetch('./data.json')
-//     let data =await res.json();
-//     data = JSON.parse(JSON.stringify(data,(a,b)=>{
-//         return typeof b === "string" ? b.toLowerCase() : b
-
-//     }))
-//     // console.log(data)
-//     data.map((element)=>{
-//         // let title = element.title;
-//         // console.log(title);
-//         for(let i= 0;i<data.length;i++ ){
-//             if(element.genres[i] =="action"){
-//                 console.log(true)
-//             }
-//         }
-//     })
-// }
-// movies()
-
-// var data = {
-//     id: 0,
-//     name: "SAMPLe",
-//     forms: {
-//       formId: 0,
-//       id: 0,
-//       text: "Sample Text"
-//     }
-//   };
-  
-//   var res = JSON.parse(JSON.stringify(data, function(a, b) {
-//     return typeof b === "string" ? b.toLowerCase() : b
-//   }));
-  
-//   console.log(res)
