@@ -9,7 +9,6 @@ const loadData =async ()=>{
    const response = await fetch('./data.json')
    const movies = await response.json();
 
-
    btn.addEventListener('click',()=>{
     const genreQuery = genre.value.toLowerCase();
     const yearQuery = year.value;
@@ -55,9 +54,6 @@ const loadData =async ()=>{
         movieYear = movieYear.substring(0,4);
 
         const tr = document.createElement('tr');
-        // let
-
-        tableBody.appendChild(tr).innerHTML="";
         tableBody.appendChild(tr).innerHTML=`<td>${id+1}</td>
         <td class="flex">
          <div class="tableImg">
@@ -69,8 +65,6 @@ const loadData =async ()=>{
          </div>
        </td>
         <td>${movieYear}</td>`
-        // document.write(`<img src="https://image.tmdb.org/t/p/w45${movie.image}" /><br>`)
-        console.log(movie.genres + "  " + movieYear +"  "+movie.language)
     })
    })
 
